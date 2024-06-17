@@ -1,5 +1,9 @@
+import 'dart:math';
+
 import 'package:bonfire/bonfire.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:mini_rpg/src/interfaces/components/bag_component.dart';
 import 'package:mini_rpg/src/interfaces/components/life_bar_component.dart';
 import 'package:mini_rpg/src/maps/initial_map.dart';
 
@@ -19,25 +23,29 @@ class _WorldGameState extends State<WorldGame> {
     return Material(
       child: BonfireWidget(
         player: widget.character,
+
         playerControllers: [
           Joystick(
             directional: JoystickDirectional(),
             actions: [
               JoystickAction(
                 actionId: 1,
+              ),
+              JoystickAction(
+                actionId: 2,
+                margin: EdgeInsets.all(100),
               )
-            ]
+            ], 
           )
         ],
         map: InitialMap().initWorld(),
         cameraConfig: CameraConfig(
           zoom: getZoomFromMaxVisibleTile(context, WorldGame.worldTileSize, 20),
-          initPosition: Vector2(WorldGame.worldTileSize * 5, WorldGame.worldTileSize * 5),
-          moveOnlyMapArea: true,
         ),
-        showCollisionArea: true,
+        showCollisionArea: false,
         hudComponents: [
-          LifeBarComponent()
+          LifeBarComponent(),
+          BagComponent()
         ],
       ),
     );

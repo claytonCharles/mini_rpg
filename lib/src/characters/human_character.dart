@@ -7,7 +7,7 @@ class HumanCharacter extends SimplePlayer with BlockMovementCollision {
     position: position,
     size: Vector2.all(32),
     life: 1000,
-    speed: WorldGame.worldTileSize * 1.3,
+    speed: WorldGame.worldTileSize * 2,
     animation: HumanSpritesSheet().simpleAnimations()
   );
 

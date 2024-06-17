@@ -32,6 +32,7 @@ class DevilMob extends SimpleEnemy with BlockMovementCollision, UseLifeBar, Rand
               simpleAttackMelee(
                 damage: 20, 
                 size: size / 2,
+                animationRight: comumSprites.simpleAttackRight
               ),
             },
             radiusVision: WorldGame.worldTileSize * 2,

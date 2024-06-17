@@ -74,4 +74,16 @@ class ComumSpritesSheet {
       )
     );
   }
+
+  Future<SpriteAnimation> get simpleAttackRight {
+    return SpriteAnimation.load(
+      "characters/simpleEffect.png",
+      SpriteAnimationData.sequenced(
+        amount: 3,
+        stepTime: 0.2, 
+        textureSize: Vector2.all(16),
+        texturePosition: Vector2(0, 0)
+      )
+    );
+  }
 }
