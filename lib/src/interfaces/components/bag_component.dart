@@ -10,8 +10,8 @@ class BagComponent extends InterfaceComponent {
     spriteUnselected: Sprite.load("ui/interact_button.png")
   );
 
-  final teste = Flame.images.load("ui/interact_button.png");
   static List fantasyInv = [];
+  bool teste = false;
 
   @override
   Future<void> onLoad() {
@@ -19,8 +19,11 @@ class BagComponent extends InterfaceComponent {
   }
 
   @override
-  void update(double dt) async {
-    
+  void update(double dt) {
+    if (teste) {
+      onTap();
+      teste = false;
+    }
     super.update(dt);
   }
 
@@ -38,15 +41,35 @@ class BagComponent extends InterfaceComponent {
                 crossAxisCount: 5,
                 children: List.generate(fantasyInv.length, (index) {
                   final item = fantasyInv[index];
-                  print(item.name);
                   return SpriteButton(
                     sprite: item.icon,
-                    label: Text(""),
+                    label: Text(
+                      "${item.quantity}",
+                      textAlign: TextAlign.end,
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20
+                      ),
+                    ),
                     pressedSprite: item.icon,
-                    height: 30,
-                    width: 30,
+                    height: 10,
+                    width: 10,
                     onPressed: () {
                       item.onUse(gameRef);
+                      if (item.quantity == 1) {
+                        fantasyInv.removeWhere((oldItem) => oldItem.name == item.name);
+                        teste = true;
+                        Navigator.pop(
+                          context
+                        );
+                        return;
+                      }
+
+                      item.quantity -= 1;
+                      teste = true;
+                      Navigator.pop(
+                        context
+                      );
                     },
                   );
                 }),
@@ -56,5 +79,16 @@ class BagComponent extends InterfaceComponent {
       }
     );
     super.onTap();
+  }
+
+  static void addItemInventory(newItem) {
+    for (final item in fantasyInv) {
+      if (item.name == newItem.name) {
+        item.quantity += 1;
+        return;
+      }
+    }
+
+    fantasyInv.add(newItem);
   }
 }

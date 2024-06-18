@@ -1,4 +1,5 @@
 import 'package:bonfire/bonfire.dart';
+import 'package:bonfire/parallax/camera_parallax.dart';
 import 'package:mini_rpg/src/interfaces/components/bag_component.dart';
 import 'dart:async' as async;
 
@@ -23,7 +24,8 @@ class MushroomDecoration extends GameDecoration with TapGesture {
       srcPosition: Vector2(16 * 7, 16),
       srcSize: Vector2(16, 16)
     );
-    BagComponent.fantasyInv.add(MushroomItem(icon: icon));
+
+    BagComponent.addItemInventory(MushroomItem(icon: icon));
     removeFromParent();
   }
 
